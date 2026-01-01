@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '4.0.1'
     id 'io.spring.dependency-management' version '1.1.7'
-    id 'com.vaadin' version '25.0.0'
+    id 'com.vaadin' version '25.0.2'
 }
 
 group = 'com.example'
@@ -26,13 +26,23 @@ repositories {
 }
 
 ext {
-    set('vaadinVersion', "25.0.0")
+    set('vaadinVersion', "25.0.2")
+    set('springAiVersion', "2.0.0-M1")
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
-    developmentOnly 'com.vaadin:vaadin-dev'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure-classic'
     implementation 'com.vaadin:vaadin-spring-boot-starter'
+
+    //  TODO: use spring dependency management when it does include this model
+    // Spring Boot 4 introduced modularization feature (old starter jars are now split into smaller modules)
+    // Spring AI has a 2.* branch to support that (not yet stable)
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama:2.0.0-M1'
+
+    developmentOnly 'com.vaadin:vaadin-dev'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
@@ -42,6 +52,7 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
     }
 }
 
