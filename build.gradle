@@ -40,6 +40,12 @@ dependencies {
     // Spring AI has a 2.* branch to support that (not yet stable)
     implementation 'org.springframework.ai:spring-ai-starter-model-ollama:2.0.0-M1'
 
+    implementation 'org.springframework.ai:spring-ai-rag'
+    implementation 'org.springframework.ai:spring-ai-tika-document-reader'
+//    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
+
+//    runtimeOnly 'org.postgresql:postgresql'
+
     developmentOnly 'com.vaadin:vaadin-dev'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 

@@ -26,4 +26,6 @@ spring:
 
 app:
   documentanalysis:
-    maxFileSizeClientCheckMB: 10
+    maxFileSizeClientCheck: 10MB
+  simplerag:
+    maxFileSizeClientCheck: 10MB

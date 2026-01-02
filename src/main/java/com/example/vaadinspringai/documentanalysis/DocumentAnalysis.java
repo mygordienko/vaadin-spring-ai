@@ -16,18 +16,19 @@ import com.vaadin.flow.server.streams.UploadHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.http.MediaType;
+import org.springframework.util.unit.DataSize;
 
 import java.io.IOException;
 import java.time.Duration;
 
-@Menu(title = "Document Analysis", order = 2)
+@Menu(title = "Text Document Analysis", order = 2)
 @Route("document-analysis")
 @Slf4j
 public class DocumentAnalysis extends VerticalLayout {
 
     public DocumentAnalysis(ChatClient.Builder builder, DocumentAnalysisConfigurationProperties properties) {
         this.chatClient = builder.build();
-        buildView(properties.getMaxFileSizeClientCheckMB());
+        buildView(properties.getMaxFileSizeClientCheck());
     }
 
     private final ChatClient chatClient;
@@ -42,7 +43,7 @@ public class DocumentAnalysis extends VerticalLayout {
         Avoid including minor details or examples unless they are crucial for understanding the main ideas.
         """;
 
-    private void buildView(int maxFileSizeMB) {
+    private void buildView(DataSize maxFileSize) {
 
         var inMemoryUploadHandler = UploadHandler.inMemory(
                 (metadata, data) -> {
@@ -73,13 +74,12 @@ public class DocumentAnalysis extends VerticalLayout {
 
         var upload = new Upload(inMemoryUploadHandler);
         upload.setAcceptedFileTypes(
-                MediaType.APPLICATION_PDF_VALUE,
                 MediaType.APPLICATION_JSON_VALUE,
                 MediaType.TEXT_PLAIN_VALUE,
                 MediaType.TEXT_MARKDOWN_VALUE,
                 MediaType.TEXT_HTML_VALUE);
         // NOTE: client-side constraint, server side check must be set independently
-        upload.setMaxFileSize(maxFileSizeMB*1024*1024);
+        upload.setMaxFileSize(((int) maxFileSize.toBytes()));
         upload.setMaxFiles(1);
         upload.addFileRejectedListener(event -> {
             var errorMessage = event.getErrorMessage();

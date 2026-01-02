@@ -1,4 +1,4 @@
-package com.example.vaadinspringai.documentanalysis;
+package com.example.vaadinspringai.simplerag;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import org.springframework.util.unit.DataSize;
 
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "app.documentanalysis")
-public class DocumentAnalysisConfigurationProperties {
+@ConfigurationProperties(prefix = "app.simplerag")
+public class SimpleRagConfigurationProperties {
     private DataSize maxFileSizeClientCheck;
 }
