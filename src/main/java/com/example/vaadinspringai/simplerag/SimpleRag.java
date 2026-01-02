@@ -22,6 +22,7 @@ import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
@@ -102,7 +103,8 @@ public class SimpleRag extends VerticalLayout {
             Notification.show(errorMessage, ((int) REJECTED_FILE_NOTIFICATION_DURATION.toMillis()), Notification.Position.MIDDLE);
         });
         upload.addFileRemovedListener(event -> {
-            log.info("Clear context");
+            // TODO: Clear context
+            log.info("TODO: Clear context");
         });
 
         popover.setTarget(contextButton);
@@ -136,7 +138,9 @@ public class SimpleRag extends VerticalLayout {
     }
 
     private void countDocs() {
-        var size = vectorStore.similaritySearch("").size();
+        // NOTE: default request `similaritySearch("")` will always return fixed number of most relevant documents,
+        //  so we explicitly set topK parameter here with big enough value to see number of documents growing
+        var size = vectorStore.similaritySearch(SearchRequest.builder().query("").topK(100).build()).size();
         log.info("Documents in store: {}", size);
     }
 

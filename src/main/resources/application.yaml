@@ -2,6 +2,10 @@ vaadin:
   launch-browser: true
 
 spring:
+  datasource:
+#    url: jdbc:postgresql://localhost:5432/db
+#    username: postgres
+#    password: example
   servlet:
     multipart:
       max-file-size: 10MB
@@ -23,6 +27,11 @@ spring:
         options:
           model: nomic-embed-text
 #        api-key=not-needed
+
+#    vectorstore:
+#      pgvector:
+#        initialize-schema: true
+#        dimensions: 768
 
 app:
   documentanalysis:
