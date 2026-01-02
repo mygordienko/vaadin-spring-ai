@@ -1,4 +1,4 @@
-package com.example.vaadinspringai.view;
+package com.example.vaadinspringai.basicchat;
 
 import com.vaadin.flow.component.messages.MessageInput;
 import com.vaadin.flow.component.messages.MessageList;

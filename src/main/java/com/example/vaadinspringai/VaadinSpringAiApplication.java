@@ -8,11 +8,13 @@ import com.vaadin.flow.theme.aura.Aura;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @Push
 @SpringBootApplication
 @StyleSheet(Aura.STYLESHEET)
 @StyleSheet("styles.css")
+@ConfigurationPropertiesScan
 public class VaadinSpringAiApplication implements AppShellConfigurator {
 
     public static void main(String[] args) {
