@@ -42,6 +42,7 @@ dependencies {
 
     implementation 'org.springframework.ai:spring-ai-rag'
     implementation 'org.springframework.ai:spring-ai-tika-document-reader'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client'
 //    implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
 
 //    runtimeOnly 'org.postgresql:postgresql'
